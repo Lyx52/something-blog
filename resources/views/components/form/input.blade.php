@@ -1,4 +1,4 @@
-<div class="mb-4 max-w-sm mx-auto">
+<div class="mb-4 w-full mx-auto">
     <label class="block text-gray-700 font-bold mb-2" for="{{ $inputName }}-input">
         {{ $label  }}
     </label>

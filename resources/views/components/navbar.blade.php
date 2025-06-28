@@ -16,6 +16,7 @@
                     @csrf
                     <button class="text-gray-400 hover:text-white cursor-pointer" type="submit">Logout</button>
                 </form>
+                <a href="{{ route('post.create.page') }}" class="text-gray-400 hover:text-white">Create post</a>
                 <a href="{{ route('auth.login.page') }}" class="text-gray-400 hover:text-white">{{ auth()->user()->username }}</a>
             @endauth
         </div>

@@ -48,11 +48,11 @@
                 @error('generic')
                 <p class="text-red-500 text-xs italic mt-2">{{$message}}</p>
                 @enderror
-                <button
+                <x-button
+                    buttonType="primary"
                     type="submit"
-                    class="border border-indigo-500 bg-indigo-500 text-white rounded-md px-4 py-2 transition duration-300 ease select-none hover:bg-indigo-600 focus:outline-none focus:shadow-outline cursor-pointer">
-                    Register
-                </button>
+                    label="Register"
+                />
             </div>
 
             <div class="text-center">

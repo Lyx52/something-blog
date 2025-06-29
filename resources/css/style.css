@@ -1,8 +1,15 @@
 @import "tailwindcss";
 @source "../views";
-@source inline("bg-{green,yellow,red,teal,indigo}-{500,600}");
-@source inline("bg-gray-{200,700,300,800}");
+@source inline("{hover:,focus:,}bg-{green,yellow,red,teal,blue}-{300,400,500,600,700}");
+@source inline("{hover:,focus:,}bg-gray-{200,700,300,800}");
 
 ul, ol {
     list-style: revert;
+}
+
+.htmx-spinner {
+    display: none;
+}
+.htmx-spinner.htmx-request {
+    display: flex;
 }

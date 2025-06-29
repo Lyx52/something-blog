@@ -53,9 +53,21 @@ return [
         'comments' => [
             'Core.Encoding' => 'utf-8',
             'HTML.Doctype' => 'HTML 4.01 Transitional',
-            'HTML.Allowed' => 'strong,i,p,br',
+            'HTML.Allowed' => 'strong,i,p,br,span[class]',
             'HTML.ForbiddenElements' => '',
             'CSS.AllowedProperties' => '',
+            'Attr.AllowedClasses' => ['text-tiny', 'text-small', 'text-big', 'text-huge'],
+            'AutoFormat.AutoParagraph' => false,
+            'AutoFormat.RemoveEmpty' => false,
+        ],
+
+        'intro' => [
+            'Core.Encoding' => 'utf-8',
+            'HTML.Doctype' => 'HTML 4.01 Transitional',
+            'HTML.Allowed' => 'br',
+            'HTML.ForbiddenElements' => '',
+            'CSS.AllowedProperties' => '',
+            'Attr.AllowedClasses' => [],
             'AutoFormat.AutoParagraph' => false,
             'AutoFormat.RemoveEmpty' => false,
         ],

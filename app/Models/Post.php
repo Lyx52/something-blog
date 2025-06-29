@@ -5,7 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Stevebauman\Purify\Facades\Purify;
 
 class Post extends Model
 {
@@ -38,8 +41,17 @@ class Post extends Model
         });
     }
 
-    public function author(): BelongsTo {
-        return $this->belongsTo(User::class, 'user_id');
+    public function author(): User {
+        return $this->belongsTo(User::class, 'user_id')->firstOrFail();
+    }
+
+    public function comments(): HasMany {
+        return $this->hasMany(Comment::class, 'post_id')
+            ->with('author');
+    }
+
+    public function intro(): string {
+        return Purify::config('intro')->clean($this->body);
     }
 
     public function getRouteKeyName()

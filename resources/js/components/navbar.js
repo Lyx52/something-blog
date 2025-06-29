@@ -5,11 +5,13 @@ const blurBackdrop = document.getElementById('blur-backdrop');
 
 function openMobileMenu() {
     mobileMenu.classList.remove('-translate-x-full');
+    mobileMenu.classList.remove('opacity-0');
     blurBackdrop.classList.remove('hidden');
 }
 
 function closeMobileMenu() {
     mobileMenu.classList.add('-translate-x-full');
+    mobileMenu.classList.add('opacity-0');
     blurBackdrop.classList.add('hidden');
 }
 
@@ -29,7 +31,6 @@ mobileMenu.querySelectorAll('a').forEach(link => {
 });
 
 document.addEventListener('click', (event) => {
-    // Close menu when clicked outside of mobile menu
     if (!mobileMenu.contains(event.target) && !mobileMenuButton.contains(event.target)) {
         closeMobileMenu();
     }

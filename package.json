@@ -15,6 +15,7 @@
         "vite": "^6.2.5"
     },
     "dependencies": {
-        "ckeditor5": "^45.2.1"
+        "ckeditor5": "^45.2.1",
+        "htmx.org": "^2.0.6"
     }
 }

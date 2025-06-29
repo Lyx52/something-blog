@@ -1,13 +1,14 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\PostsController;
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
 /**
- * Routes for authentication, authorization etc...
+ * AUTHORIZATION/AUTHENTICATION
  */
 Route::name("auth.")->group(function () {
     Route::get("/login", [AuthController::class, "loginPage"])->name("login.page");
@@ -19,13 +20,26 @@ Route::name("auth.")->group(function () {
     Route::post("/logout", [AuthController::class, "logout"])->name("logout");
 });
 
+/**
+ * HOME/USER
+ */
+
 Route::name("home.")->group(function () {
     Route::get("/", [HomepageController::class, "index"])->name("index.page");
+    Route::get("/load-more", [HomepageController::class, "loadMore"])->name("load-more");
 });
 
-// Read post
+// Authorized
+Route::name("home.")->middleware("auth")->group(function () {
+    Route::get("/my-posts", [HomepageController::class, "userPosts"])->name("my-posts.page");
+});
+
+/**
+ * POSTS
+ */
 Route::get("/post/{post}", [PostsController::class, "view"])->name("post.view.page");
 
+// Authorized
 Route::middleware("auth")->name("post.")->group(function () {
     Route::get("/post/create/new", [PostsController::class, "createPage"])->name("create.page");
 
@@ -46,4 +60,14 @@ Route::middleware("auth")->name("post.")->group(function () {
     Route::delete("/post/delete/{post:id}", [PostsController::class, "delete"])
         ->name("delete")
         ->can('delete', 'post');
+});
+
+/**
+ * COMMENTS
+ */
+
+// Authorized
+Route::middleware("auth")->name("comment.")->group(function () {
+    Route::post("/comment/create", [CommentController::class, "create"])
+        ->name("create");
 });

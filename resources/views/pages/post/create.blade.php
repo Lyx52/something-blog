@@ -1,7 +1,7 @@
 @extends("layouts/page-layout")
 @section("content")
-    <div class="mx-auto mt-8 overflow-hidden rounded-xl bg-white shadow-md h-fit">
-        <div class="p-8 flex flex-col w-3xl h-fit">
+    <div class="mx-auto mt-8 overflow-hidden rounded-xl bg-white shadow-md h-fit max-w-3xl">
+        <div class="p-8 flex flex-col h-fit">
             <h1 class="text-2xl md:text-4xl text-center font-extrabold text-gray-900 mb-6 leading-tight">
                 Create a blog post
             </h1>

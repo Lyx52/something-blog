@@ -10,8 +10,9 @@
         <p class="text-gray-600 mb-6">
             Oops! The page you're looking for doesn't exist.
         </p>
-        <a href="{{ route("home.index.page") }}" class="inline-block bg-blue-500 text-white font-semibold py-3 px-6 rounded-lg hover:bg-blue-600 transition duration-300 ease-in-out">
-            Go back home
-        </a>
+        <x-link
+            label="Back to home"
+            :href="route('home.index.page')"
+        />
     </div>
 @endsection

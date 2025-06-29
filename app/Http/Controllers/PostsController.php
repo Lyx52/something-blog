@@ -30,10 +30,11 @@ class PostsController extends Controller
             return route('auth.login.page');
         }
 
-        $post = Post::factory()->create([
+        $post = Post::create([
             'title' => $title,
             'body' => $body,
             'user_id' => $user->id,
+            'slug' => '',
         ]);
 
         return redirect()->route('post.view.page', [
@@ -65,7 +66,8 @@ class PostsController extends Controller
     public function view(Post $post) {
         return view("pages.post.view", [
             'post' => $post,
-            'author' => $post->author()->first(),
+            'author' => $post->author(),
+            'comments' => $post->comments()->orderBy('created_at', 'desc')->get()
         ]);
     }
 }

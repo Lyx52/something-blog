@@ -6,18 +6,19 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Button extends Component
+class Link extends Component
 {
+    public string $label;
+    public string $href;
     public string $color;
     public string $colorHover;
     public string $colorText;
-    public string $label;
     /**
      * Create a new component instance.
      */
-    public function __construct(string $label, string $buttonType = "primary")
+    public function __construct(string $label, string $href, string $linkType = 'primary')
     {
-        $this->color = match ($buttonType) {
+        $this->color = match ($linkType) {
             "success" => "green-400",
             "warning" => "yellow-400",
             "danger" => "red-400",
@@ -27,7 +28,7 @@ class Button extends Component
             default => "blue-400"
         };
 
-        $this->colorHover = match ($buttonType) {
+        $this->colorHover = match ($linkType) {
             "success" => "green-500",
             "warning" => "yellow-500",
             "danger" => "red-500",
@@ -37,12 +38,14 @@ class Button extends Component
             default => "blue-500"
         };
 
-        $this->colorText = match ($buttonType) {
+        $this->colorText = match ($linkType) {
             "light" => "black",
             default => "white"
         };
 
+
         $this->label = $label;
+        $this->href = $href;
     }
 
     /**
@@ -50,6 +53,6 @@ class Button extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.form.button');
+        return view('components.common.link');
     }
 }

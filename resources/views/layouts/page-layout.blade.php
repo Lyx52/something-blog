@@ -13,7 +13,7 @@
             @include("components/navbar")
             @yield("header")
         </header>
-        <main class="mx-auto px-4 md:px-2">
+        <main class="mx-auto px-4 md:px-2 w-full">
             @yield('content')
         </main>
         <footer class="mt-auto">

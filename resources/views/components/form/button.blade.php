@@ -1,5 +1,5 @@
 <button
-    class="border border-{{ $color }} bg-{{ $color }} text-{{ $colorText }} rounded-md px-4 py-2 transition duration-300 ease select-none hover:bg-{{ $colorHover }} focus:outline-none focus:shadow-outline cursor-pointer"
+    class="bg-{{ $color }} text-white content-center font-semibold py-3 px-6 rounded-lg hover:bg-{{ $colorHover }} transition duration-300 ease-in-out cursor-pointer"
     {{ $attributes }}
 >
     {{ $label }}

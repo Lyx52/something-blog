@@ -47,7 +47,7 @@ class AuthController extends Controller
             ]);
         }
 
-        User::factory()->create([
+        User::create([
             "username" => $validatedPayload["username"],
             "email" => $validatedPayload["email"],
             "password" => Hash::make($validatedPayload["password"]),

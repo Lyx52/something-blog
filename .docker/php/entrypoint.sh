@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 # Install dependencies
-RUN composer install
+composer install
 
 # Run migrations
 php artisan migrate --force

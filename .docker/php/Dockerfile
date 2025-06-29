@@ -1,11 +1,22 @@
-FROM php:8.3-fpm
+FROM node:22-alpine AS builder
+WORKDIR /app
 
-COPY php.ini /usr/local/etc/php/
-COPY docker.conf /usr/local/etc/php-fpm.d/docker.conf
-COPY .bashrc /root/
+COPY package*.json ./
+RUN npm install
+COPY . .
+
+RUN npm run build
+
+FROM php:8.3-fpm AS runtime
+
+COPY --from=builder /app/public /var/www
+
+COPY .docker/php/php.ini /usr/local/etc/php/
+COPY .docker/php/docker.conf /usr/local/etc/php-fpm.d/docker.conf
+COPY .docker/php/.bashrc /root/
 
 # Copy the entrypoint script
-COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+COPY .docker/php/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
 # mix
@@ -49,8 +60,6 @@ ENV COMPOSER_HOME /composer
 ENV PATH $PATH:/composer/vendor/bin
 RUN composer config --global process-timeout 3600
 RUN composer global require "laravel/installer"
-
-WORKDIR /root
 
 EXPOSE 5173
 WORKDIR /var/www

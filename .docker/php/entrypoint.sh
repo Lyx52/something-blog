@@ -3,6 +3,7 @@ set -e
 
 # Run migrations
 php artisan migrate --force
+php artisan db:seed --class=CategorySeeder
 
 # Set permissions for Laravel directories
 chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache

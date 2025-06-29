@@ -4,19 +4,26 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreatePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use App\Models\Category;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Stevebauman\Purify\Facades\Purify;
 
 class PostsController extends Controller
 {
     public function createPage() {
-        return view("pages.post.create");
+        $categories = Category::all();
+        return view("pages.post.create", [
+            'categories' => $categories,
+        ]);
     }
 
     public function updatePage(Post $post) {
+        $categories = Category::all();
         return view("pages.post.update", [
-            "post" => $post
+            "post" => $post,
+            "categories" => $categories,
         ]);
     }
 
@@ -30,12 +37,17 @@ class PostsController extends Controller
             return route('auth.login.page');
         }
 
+        /** @var Post $post */
         $post = Post::create([
             'title' => $title,
             'body' => $body,
             'user_id' => $user->id,
             'slug' => '',
         ]);
+
+        if (!empty($validatedData['categories'])) {
+            $post->categories()->sync($validatedData['categories']);
+        }
 
         return redirect()->route('post.view.page', [
             'post' => $post,
@@ -52,6 +64,10 @@ class PostsController extends Controller
             'title' => $title,
             'body' => $body,
         ]);
+
+        if (!empty($validatedData['categories'])) {
+            $post->categories()->sync($validatedData['categories']);
+        }
 
         return redirect()->route('post.view.page', [
             'post' => $post,

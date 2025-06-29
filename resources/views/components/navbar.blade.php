@@ -66,5 +66,3 @@
         </nav>
     </div>
 </div>
-
-@vite('resources/js/components/navbar.js')

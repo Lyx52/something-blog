@@ -3,7 +3,9 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 return Application::configure(basePath: dirname(__DIR__))
@@ -20,8 +22,23 @@ return Application::configure(basePath: dirname(__DIR__))
 
     })
     ->withExceptions(function (Exceptions $exceptions) {
+        // Not found
         $exceptions->render(function (NotFoundHttpException $e, Request $request) {
             return response()->view('pages.404', [], 404);
+        });
+
+        // Access denied
+        $exceptions->render(function (AccessDeniedHttpException $e, Request $request) {
+            return response()->view('pages.403', [], 403);
+        });
+
+        // Unknown exception
+        $exceptions->render(function (\Symfony\Component\HttpKernel\Exception\HttpException $e, Request $request) {
+            Log::error("Internal Server Exception {message}", [
+                'message' => $e->getMessage(),
+            ]);
+
+            return response()->view('pages.500', [], 500);
         });
     })
     ->create();

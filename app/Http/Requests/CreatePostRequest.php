@@ -24,6 +24,8 @@ class CreatePostRequest extends FormRequest
         return [
             'title' => 'required|string|max:256',
             'body' => 'required|string',
+            'categories[]' => 'array',
+            'categories.*' => 'integer|exists:categories,id',
         ];
     }
 }

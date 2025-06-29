@@ -8,7 +8,19 @@
 
             <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-8">
                 <div class="text-gray-600 text-sm md:text-base mb-4 sm:mb-0">
-                    By <span class="font-medium text-blue-600">{{ $author->username }}</span> on {{ $post->created_at->format('F d, Y H:i') }}
+                    <div class="flex flex-wrap items-center text-gray-600 text-sm md:text-base mb-4 sm:mb-0">
+                        <span class="me-2 mb-2">
+                            By&nbsp;<span class="font-medium text-blue-600">{{ $author->username }}</span>&nbsp;on&nbsp;{{ $post->created_at->format('F d, Y H:i') }}
+                        </span>
+                        <div class="flex flex-wrap gap-2">
+                            @foreach($post->categories()->get() as $category)
+                                <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">
+                                    {{ $category->title }}
+                                </span>
+                            @endforeach
+                        </div>
+                    </div>
+
                 </div>
                 <div class="flex gap-3">
                     @can("update", $post)
@@ -57,15 +69,7 @@
 
             <div>
                 @foreach($comments as $comment)
-                    <div class="bg-gray-50 rounded-xl p-6 mb-4 shadow-sm border border-gray-200">
-                        <div class="flex items-center mb-2">
-                            <p class="font-semibold text-gray-800 text-lg mr-2">{{ $comment->author->username }}</p>
-                            <p class="text-gray-500 text-sm">{{ $comment->created_at->format('F d, Y H:i') }}</p>
-                        </div>
-                        <p class="text-gray-700 leading-relaxed">
-                            {!! $comment->comment !!}
-                        </p>
-                    </div>
+                    <x-comment-view :comment="$comment" />
                 @endforeach
             </div>
         </div>

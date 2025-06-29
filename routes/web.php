@@ -70,4 +70,7 @@ Route::middleware("auth")->name("post.")->group(function () {
 Route::middleware("auth")->name("comment.")->group(function () {
     Route::post("/comment/create", [CommentController::class, "create"])
         ->name("create");
+
+    Route::delete("/comment/delete/{comment}", [CommentController::class, "delete"])
+        ->name("delete");
 });

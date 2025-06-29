@@ -17,7 +17,3 @@
             {{ $value }}
         </textarea>
 </div>
-
-@once
-    @vite('resources/js/components/form/text-editor.js')
-@endonce

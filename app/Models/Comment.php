@@ -16,8 +16,8 @@ class Comment extends Model
         'comment',
     ];
 
-    public function author(): BelongsTo {
-        return $this->belongsTo(User::class, 'user_id');
+    public function author(): User {
+        return $this->belongsTo(User::class, 'user_id')->firstOrFail();
     }
 
     public function post(): BelongsTo {

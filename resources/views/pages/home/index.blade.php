@@ -32,10 +32,21 @@
 
         <div class="bg-white shadow-xl rounded-2xl p-6 md:p-8 mb-8 mx-auto">
             <h2 class="text-2xl font-bold text-gray-900 mb-4">Categories</h2>
-            <div class="flex flex-wrap gap-3">
-                <x-category-checkbox checked />
-                <x-category-checkbox />
-                <x-category-checkbox />
+            <div class="flex flex-wrap gap-3"
+                 id="checkboxContainer"
+            >
+                @foreach($categories as $category)
+                    <x-category-checkbox
+                        :category="$category"
+                        name="categories[]"
+                        hx-trigger="change"
+                        hx-get="/load-more?page=1{{ $userPosts ? '&user=1' : '' }}"
+                        hx-include="[name='categories[]']"
+                        hx-target="#posts-container"
+                        hx-swap="innerHTML"
+                        hx-indicator="#search-indicator"
+                    />
+                @endforeach
             </div>
         </div>
 
@@ -64,6 +75,10 @@
                     hx-target="#posts-container"
                     hx-indicator="#load-more-indicator"
                 />
+            </div>
+        @else
+            <div id="load-more-container" class="flex justify-center mt-10" hx-swap-oob="true">
+
             </div>
         @endif
     </div>

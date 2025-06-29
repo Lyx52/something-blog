@@ -2,20 +2,20 @@
 
 namespace App\View\Components;
 
-use App\Models\Category;
+use App\Models\Comment;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class CategoryCheckbox extends Component
+class CommentView extends Component
 {
-    public Category $category;
+    public Comment $comment;
     /**
      * Create a new component instance.
      */
-    public function __construct(Category $category)
+    public function __construct(Comment $comment)
     {
-        $this->category = $category;
+        $this->comment = $comment;
     }
 
     /**
@@ -23,6 +23,6 @@ class CategoryCheckbox extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.common.category-checkbox');
+        return view('components.content.comment-view');
     }
 }

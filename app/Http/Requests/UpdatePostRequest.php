@@ -34,7 +34,9 @@ class UpdatePostRequest extends FormRequest
         return [
             'title' => 'required|string|max:256',
             'body' => 'required|string',
-            'id' => 'required|integer|exists:posts,id'
+            'id' => 'required|integer|exists:posts,id',
+            'categories[]' => 'array',
+            'categories.*' => 'integer|exists:categories,id',
         ];
     }
 }

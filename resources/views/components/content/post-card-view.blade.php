@@ -6,8 +6,17 @@
         <p class="text-gray-700 mb-4 line-clamp-3">
             {!! $post->intro() !!}
         </p>
-        <div class="text-gray-600 text-sm mb-4">
-            By <span class="font-medium text-blue-600">{{ $post->author()->username }}</span> on {{ $post->created_at }}
+        <div class="flex flex-wrap items-center text-gray-600 text-sm md:text-base mb-4 sm:mb-0">
+            <span class="me-2">
+                By&nbsp;<span class="font-medium text-blue-600">{{ $post->author()->username }}</span>&nbsp;on&nbsp;{{ $post->created_at->format('F d, Y H:i') }}
+            </span>
+            <div class="flex flex-wrap gap-2">
+                @foreach($post->categories()->get() as $category)
+                    <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">
+                        {{ $category->title }}
+                    </span>
+                @endforeach
+            </div>
         </div>
     </a>
 

@@ -31,4 +31,11 @@ class CommentController extends Controller
             'post' => $post,
         ]);
     }
+
+    public function delete(Comment $comment)
+    {
+        $comment->delete();
+
+        return back();
+    }
 }

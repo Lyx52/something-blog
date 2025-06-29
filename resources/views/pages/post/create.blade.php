@@ -22,6 +22,23 @@
                     :value="old('body') ?? ''"
                 />
 
+                <div class="mb-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">Categories</h2>
+                    @error('categories[]')
+                    <p class="text-red-500 text-xs italic my-2">{{$message}}</p>
+                    @enderror
+                    <div class="flex flex-wrap gap-3"
+                         id="checkboxContainer"
+                    >
+                        @foreach($categories as $category)
+                            <x-category-checkbox
+                                name="categories[]"
+                                :category="$category"
+                            />
+                        @endforeach
+                    </div>
+                </div>
+
                 <div class="mb-4">
                     @error('generic')
                     <p class="text-red-500 text-xs italic my-2">{{$message}}</p>

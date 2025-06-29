@@ -30,6 +30,15 @@
             </div>
         </div>
 
+        <div class="bg-white shadow-xl rounded-2xl p-6 md:p-8 mb-8 mx-auto">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">Categories</h2>
+            <div class="flex flex-wrap gap-3">
+                <x-category-checkbox checked />
+                <x-category-checkbox />
+                <x-category-checkbox />
+            </div>
+        </div>
+
         <x-loading-indicator
             id="search-indicator"
             class="my-10"

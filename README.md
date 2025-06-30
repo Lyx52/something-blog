@@ -4,7 +4,7 @@ Starter template used: https://github.com/refactorian/laravel-docker/tree/larave
 
 # Production Setup
 
-1. First copy environment file .env.example to .env and modify configuration such as db passwords etc.
+1. First copy environment file .env.example to .env and modify configuration such as db passwords etc, set to production, asset/app urls.
 2. Start production container using:
 ```bash
 docker compose up --build -d

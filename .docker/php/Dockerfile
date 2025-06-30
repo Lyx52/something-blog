@@ -5,11 +5,6 @@ COPY package*.json ./
 RUN npm install
 COPY . .
 
-RUN composer install --no-dev --optimize-autoloader
-
-RUN cp .env.example .env || true
-RUN php artisan key:generate
-
 RUN npm run build
 
 FROM php:8.3-fpm AS runtime

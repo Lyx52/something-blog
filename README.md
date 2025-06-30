@@ -9,6 +9,10 @@ Starter template used: https://github.com/refactorian/laravel-docker/tree/larave
 ```bash
 docker compose up --build -d
 ```
+3. Generate laravel key using (You can also connect to container using docker exec -it <container id> bash):
+```bash
+php artisan key:generate
+```
 
 # Development Setup
 1. First copy environment file .env.example to .env and modify configuration such as db passwords etc.
@@ -21,6 +25,7 @@ docker compose -f docker-compose.dev.yml up --build -d
 composer install
 npm install
 npm run dev
+php artisan key:generate
 ```
 
 4. To configure xdebug, set host to _, port to 9000 and set **project path** relative to container **/var/www** path

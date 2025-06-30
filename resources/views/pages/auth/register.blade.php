@@ -2,7 +2,7 @@
 
 @section("content")
 <div class="mx-auto mt-8 max-w-md overflow-hidden rounded-xl bg-white shadow-md md:max-w-2xl">
-    <div class="p-8 flex flex-col w-100">
+    <div class="p-8 flex flex-col w-full">
         <div class="text-xl font-semibold tracking-wide text-indigo-500 uppercase mx-auto mb-2">Register</div>
         <form class="pt-3" method="post" action="{{ route('auth.register') }}" autocomplete="off">
             @csrf
